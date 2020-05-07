@@ -9,11 +9,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://frncosti@bitbucket.org/frncosti/portfolio-es6.git"
+    "url": "git+https://github.com/frncosti/covid-map.git"
   },
   "author": "Francesco Costi",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/frncosti/portfolio-es6#readme",
+  "homepage": "hhttps://github.com/frncosti/covid-map.git#readme",
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.0",
