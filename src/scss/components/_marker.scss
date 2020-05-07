@@ -1,0 +1,17 @@
+.marker {
+    display: block;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0;
+}
+.marker {
+    background-image: url('../images/gpin.png');
+    background-size: cover;
+    //width: 38px;
+    //height: 45px;
+    width: 26px;
+    height: 36px;
+    //border-radius: 50%;
+    cursor: pointer;
+}

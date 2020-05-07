@@ -1,0 +1,42 @@
+/* generals */
+@import './generals/colors';
+@import './generals/variables';
+@import './generals/fontimports';
+@import './generals/global';
+
+/* components */
+@import './components/mapbox-gl';
+@import './components/map';
+@import './components/marker';
+@import './components/popup';
+@import './components/modal';
+@import './components/header';
+@import './components/loader';
+
+
+.data-source {
+    position: absolute;
+    bottom: 0;
+    padding: 0 5px;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+    color: rgba(0, 0, 0, 0.75);
+    font-size: 12px;
+
+    a {
+        color: rgba(0, 0, 0, 0.75);
+        font-weight: 600;
+        text-decoration: none;
+    }
+}
+
+.mapbox-improve-map {
+    display: none;
+}
+.mapboxgl-canvas {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}

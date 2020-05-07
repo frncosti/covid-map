@@ -1,0 +1,61 @@
+// Raised Button
+.btn {
+    display: block;
+    font-weight: $btn-font-weight;
+    color: $btn-text-color;
+    text-align: center;
+    user-select: none;
+    background-color: transparent;
+    border: $btn-border-width solid transparent;
+    text-decoration: none;
+    border-radius: $btn-border-radius;
+    cursor: pointer;
+
+    @include button-size(
+        $btn-padding-y, 
+        $btn-padding-x, 
+        $btn-font-size, 
+        $btn-line-height
+        );
+
+    @each $color, $value in $theme-colors {
+        &.btn-#{$color} {
+            @include button-variant($value, $value, $white);
+        }
+    }
+
+    @each $color, $value in $theme-colors {
+        &.btn-outline-#{$color} {
+            @include button-outline-variant($value, transparent, $white);
+        }
+    }
+
+    @each $color, $value in $theme-colors {
+        &.btn-circle-#{$color} {
+            width: $btn-circle-width;
+            height: $btn-circle-width;
+            padding: 0;
+            border-radius: 50%;
+
+            @include button-variant($value, $value, $white);
+        }
+    }
+
+    &.btn-lg {
+        @include button-size(
+            $btn-padding-y-lg, 
+            $btn-padding-x-lg, 
+            $btn-font-size-lg, 
+            $btn-line-height-lg
+            );
+    }
+
+    &.btn-sm {
+        @include button-size(
+            $btn-padding-y-sm, 
+            $btn-padding-x-sm, 
+            $btn-font-size-sm, 
+            $btn-line-height-sm
+            );
+    }
+}

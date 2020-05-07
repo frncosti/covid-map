@@ -1,0 +1,83 @@
+@mixin button-variant(
+    $background, 
+    $border,
+    $text-color: $btn-text-color, 
+    $hover-background: lighten($background, 10%), 
+    $hover-border: lighten($border, 10%), 
+    $active-background: darken($background, 10%), 
+    $active-border: darken($border, 10%),
+    $active-text-color: $btn-text-color) {
+        color: $text-color;
+        $active-text-color: $text-color;
+        background-color: $background;
+        border-color: $border;
+        &:hover,
+        &.hover {
+            background-color: $hover-background;
+            border-color: $hover-border;
+        }
+        &:focus,
+        &.focus {
+            background-color: $active-background;
+            border-color: $active-border;
+            color: $active-text-color;
+        }
+        &[disable],
+        &.disabled,
+        &:disabled {
+            background-color: $background;
+            border-color: $border;
+            opacity: 0.5;
+        }
+        &:not([disabled]):not(.disabled):active,
+        &:not([disabled]):not(.disabled).active,
+        .show > &.dropdown-toggle {
+            background-color: $active-background;
+            border-color: $active-border;
+            color: $active-text-color;
+        }
+}
+
+@mixin button-outline-variant(
+    $color,
+    $color-hover:
+    $gray-200,
+    $active-text-color: $white) {
+    color: $color;
+    background-color: transparent;
+    background-image: none;
+    border-color: $color;
+    &:hover,
+    &.hover {
+        color: $color;
+        background-color: rgba($color, 0.2);
+        border-color: $color;
+    }
+    &:focus,
+    &.focus {
+        color: $active-text-color;
+        background-color: $color;
+        border-color: $color;
+    }
+    &.disabled,
+    &:disabled {
+        // color: $active-text-color;
+        // background-color: $color;
+        opacity: 0.5;
+    }
+  
+    &:not([disabled]):not(.disabled):active,
+    &:not([disabled]):not(.disabled).active,
+    .show > &.dropdown-toggle {
+        color: $active-text-color;
+        background-color: $color;
+        border-color: $color;
+    }
+}
+
+// Button sizes
+@mixin button-size($padding-y, $padding-x, $font-size, $line-height) {
+    padding: $padding-y $padding-x;
+    font-size: $font-size;
+    line-height: $line-height;
+}
