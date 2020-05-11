@@ -306,6 +306,10 @@ const createMapHtml = () => {
     dataSource.setAttribute("class", "data-source");
     dataSource.innerHTML = "API @<a href='https://covid19api.com/#details' target='_blank'>covid19api.com</a>. Data is sourced from <a href='https://github.com/CSSEGISandData/COVID-19' target='_blank'>Johns Hopkins CSSE</a>";
 
+    const disclaimerDiv = document.createElement('div');
+    disclaimerDiv.setAttribute("id", "disclaimer");
+    disclaimerDiv.innerHTML = "The designations employed and the presentation of material on this map do not imply the expression of any opinion whatsoever on the part of the Secretariat of the United Nations or UNDP concerning the legal status of any country, territory, city or area or its authorities, or concerning the delimitation of its frontiers or boundaries.";
+
     initMapHeader(mapHeader);
     iniModalHtml(mapModal);
 
@@ -313,6 +317,7 @@ const createMapHtml = () => {
     mapContainer.appendChild(mapHeader);
     mapContainer.appendChild(mapModal);
     mapContainer.appendChild(dataSource);
+    insertAfter(disclaimerDiv, mapContainer);
 }
 
 const isNotSupported = message => {
@@ -323,6 +328,10 @@ const isNotSupported = message => {
     elMap.innerHTML = message;
     
     mapContainer.appendChild(elMap);
+}
+
+const insertAfter = (el, referenceNode) => {
+    referenceNode.parentNode.insertBefore(el, referenceNode.nextSibling);
 }
 
 const popupTemplate = (title, country, bodytext, link) => {
