@@ -98,6 +98,12 @@ const onLoadMap = (geojson, map, initialCoordinates, results) => {
                 }
             }
 
+            confirmed = confirmed == undefined ? '0' : confirmed;
+            deaths = deaths == undefined ? '0' : deaths;
+            recovered = recovered == undefined ? '0' : recovered;
+
+            console.log('Confirmed: ' + confirmed + ' Deaths: ' + deaths + ' ' + ' Recovered' + recovered);
+
             pinOnClick(
                 map,
                 marker.geometry.coordinates,
