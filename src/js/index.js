@@ -228,6 +228,10 @@ const onSearchDropDown = (map, geojson, results, initialCoordinates) => {
                 let deathsModal;
                 let recoveredModal;
 
+                confirmedModal = confirmedModal == undefined ? 0 : confirmedModal;
+                deathsModal = deathsModal == undefined ? 0 : deathsModal;
+                recoveredModal = recoveredModal == undefined ? 0 : recoveredModal;
+
                 for (let i=0; i < results.length; i++) {
                     if (results[i].Slug == marker.properties.country) {
                         confirmedModal = results[i].TotalConfirmed;
