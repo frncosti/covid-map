@@ -262,7 +262,7 @@ export const geojson = {
             'properties': {
                 'title': 'Pakistan',
                 'country': 'pakistan',
-                'bodytext': '<li>Supporting mitigation response plan, focused on low-income and daily laborers and other marginalized groups, emergency response, strategic communications, and establishing a Secretariat for multi-sectoral planning, financing and coordination</li><li><a href="https://www.pk.undp.org/content/pakistan/en/home/about-us/partners.html" target="_blank">Our partners</a></li>',
+                'bodytext': '<li>Supporting <a href="https://www.pk.undp.org/content/pakistan/en/home/covid-19-pandemic-response/support-to-national-response.html">mitigation response plan</a>, focused on low-income and daily laborers and other marginalized groups, <a href="https://www.pk.undp.org/content/pakistan/en/home/covid-19-pandemic-response/support-to-national-response.html">emergency response, strategic communications</a>, and <a href="https://www.pk.undp.org/content/pakistan/en/home/covid-19-pandemic-response/support-to-national-response.html">establishing a Secretariat</a> for multi-sectoral planning, financing and coordination</li><li>Check our <a href="https://www.asia-pacific.undp.org/content/rbap/en/home/presscenter/pressreleases/2020/covid-19-recovery-must-deliver-universal-health-insurance--safet.html" target="_blank">Economist Report</a> on how to build a better future</li><li><a href="https://www.pk.undp.org/content/pakistan/en/home/about-us/partners.html" target="_blank">Our partners</a></li>',
                 'link': 'https://www.pk.undp.org/content/pakistan/en/home/covid-19-pandemic-response/support-to-national-response.html',
                 'confirmed': 19103,
                 'deaths': 440,
