@@ -5,6 +5,8 @@
 ##  Build App
 - npm run build
 
+Please use dist folder for prod
+
 ## Demo
 - http://frncosti.com/
 
