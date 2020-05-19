@@ -15,14 +15,15 @@
     .map-search-wrapper {
         position: absolute;
         top: 1rem;
-        right: 2rem;
+        right: 0rem;
         width: 100%;
         display: flex;
         justify-content: flex-end;
         max-width: 500px;
+        padding: 0 1rem;
 
         @media (max-width: 680px) {
-            padding-left: 110px;
+            //padding-left: 110px;
         }
     }
     

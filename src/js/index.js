@@ -3,7 +3,6 @@ import axios from 'axios';
 import { geojson } from './geojson';
 import '../scss/index.scss';
 import pin from '../images/gpin.png';
-import brandLogo from '../images/undp-official-logo-blue.png';
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -33,7 +32,9 @@ const initMap = results => {
     const token = 'pk.eyJ1IjoiZmNvc3RpIiwiYSI6ImNrOGlkYW13YTAwcHUzZGsyeGsxanBubWUifQ.y6teVsLPwuJZ-D_gUbLwFA';
     const mapStyle = 'mapbox://styles/fcosti/ck95reywf4fss1js93gcn7zmg';
     const initialCoordinates = [120.523186, 18.736717];
-    const initialZoom = 2;
+    const mq = window.matchMedia( "(min-width: 796px)" );
+    let initialZoom = mq.matches ? 2 : 1;
+    let isInteractive = mq.matches ? true : false;
 
     createMapHtml();
     
@@ -43,15 +44,16 @@ const initMap = results => {
         style: mapStyle,
         center: initialCoordinates,
         zoom: initialZoom,
+        interactive: isInteractive,
     });
 
     map.on('load', () => {
-        onLoadMap(geojson, map, initialCoordinates, results);
-        onSearchDropDown(map, geojson, results, initialCoordinates);
+        onLoadMap(geojson, map, initialCoordinates, results, initialZoom);
+        onSearchDropDown(map, geojson, results, initialCoordinates, initialZoom);
     });
 }
 
-const onLoadMap = (geojson, map, initialCoordinates, results) => {
+const onLoadMap = (geojson, map, initialCoordinates, results, initialZoom) => {
     document.getElementById('map').classList.remove('map-loader');
     document.getElementById('mapcontrols').classList.add('show');
 
@@ -86,6 +88,7 @@ const onLoadMap = (geojson, map, initialCoordinates, results) => {
         // Add click event listener to markers
         el.addEventListener('click', () => {
             let country = marker.properties.country;
+            let title = marker.properties.title;
             let confirmed;
             let deaths;
             let recovered;
@@ -107,7 +110,7 @@ const onLoadMap = (geojson, map, initialCoordinates, results) => {
             pinOnClick(
                 map,
                 marker.geometry.coordinates,
-                country,
+                title,
                 confirmed,
                 deaths,
                 recovered,
@@ -122,7 +125,7 @@ const onLoadMap = (geojson, map, initialCoordinates, results) => {
 
         // Popup on close
         popup.on('close', e => {
-            popUpOnClose(map, initialCoordinates);
+            popUpOnClose(map, initialCoordinates, initialZoom);
         });
     });
 }
@@ -153,7 +156,7 @@ const pinOnClick = (map, coord, country, confirmed, deaths, recovered, popup) =>
     });
 }
 
-const popUpOnClose = (map, initialCoordinates) => {
+const popUpOnClose = (map, initialCoordinates, initialZoom) => {
     const modal = document.getElementById('modal');
 
     modal.classList.remove('slide-in');
@@ -163,7 +166,7 @@ const popUpOnClose = (map, initialCoordinates) => {
     // On popup close return to initial coordinates
     map.flyTo({
         center: initialCoordinates, 
-        zoom: 2,
+        zoom: initialZoom,
         pitch: 0,
         bearing: 0,
     });
@@ -181,7 +184,7 @@ const initSearchDropDown = (country, title) => {
     target.innerHTML = target.innerHTML + option;
 }
 
-const onSearchDropDown = (map, geojson, results, initialCoordinates) => {
+const onSearchDropDown = (map, geojson, results, initialCoordinates, initialZoom) => {
     const mapSearch = document.getElementById("map-search");
 
     mapSearch.onchange = () => {
@@ -223,7 +226,7 @@ const onSearchDropDown = (map, geojson, results, initialCoordinates) => {
                 modal.classList.remove('slide-out');
                 modal.classList.add('slide-in');
 
-                let countryModal = marker.properties.country;
+                let countryModal = marker.properties.title;
                 let confirmedModal;
                 let deathsModal;
                 let recoveredModal;
@@ -262,7 +265,7 @@ const onSearchDropDown = (map, geojson, results, initialCoordinates) => {
 
                     map.flyTo({
                         center: initialCoordinates, 
-                        zoom: 2,
+                        zoom: initialZoom,
                         pitch: 0,
                         bearing: 0,
                     });
@@ -316,10 +319,6 @@ const createMapHtml = () => {
     dataSource.setAttribute("class", "data-source");
     dataSource.innerHTML = "API @<a href='https://covid19api.com/#details' target='_blank'>covid19api.com</a>. Data is sourced from <a href='https://github.com/CSSEGISandData/COVID-19' target='_blank'>Johns Hopkins CSSE</a>";
 
-    const disclaimerDiv = document.createElement('div');
-    disclaimerDiv.setAttribute("id", "disclaimer");
-    disclaimerDiv.innerHTML = "The designations employed and the presentation of material on this map do not imply the expression of any opinion whatsoever on the part of the Secretariat of the United Nations or UNDP concerning the legal status of any country, territory, city or area or its authorities, or concerning the delimitation of its frontiers or boundaries.";
-
     initMapHeader(mapHeader);
     iniModalHtml(mapModal);
 
@@ -327,7 +326,6 @@ const createMapHtml = () => {
     mapContainer.appendChild(mapHeader);
     mapContainer.appendChild(mapModal);
     mapContainer.appendChild(dataSource);
-    insertAfter(disclaimerDiv, mapContainer);
 }
 
 const isNotSupported = message => {
@@ -365,7 +363,6 @@ function initModal(country, confirmed, deaths, recovered) {
     var template =  `
     <div class="m-section m-header-section">
         <h3>${country}</h3>
-        <div class="arr-right"></div>
     </div>
     
     <div class="p-data-container">
@@ -387,8 +384,6 @@ function initModal(country, confirmed, deaths, recovered) {
 
     <div class="m-buttons-section">
         <div id="m-buttons-close" class="m-button m-buttons-close"><i class="fas fa-times"></i></div>
-        <div class="m-button m-buttons-info"><i class="fas fa-info"></i></div>
-        <div class="m-button m-buttons-docs"><i class="fas fa-file-medical-alt"></i></div>
     </div>
     `
     document.getElementById("modal").innerHTML = template;
@@ -397,7 +392,6 @@ function initModal(country, confirmed, deaths, recovered) {
 const initMapHeader = div => {
     div.innerHTML =
         `
-        <img class="logo" src="${brandLogo}" alt="brand-logo">
         <div class="map-search-wrapper">
             <select id="map-search" class="form-control">
                 <option value="#">- select country -</option>

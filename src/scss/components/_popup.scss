@@ -4,9 +4,16 @@
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
     margin: auto !important;
-    max-width: 326px !important;
+    //max-width: 326px !important;
+    max-width: 420px !important;
     font-family: 'Poppins', sans-serif;
     z-index: 2000;
+
+
+    @media (max-width: 768px) {
+        padding: 0 1rem !important;
+        bottom: -1rem;
+    }
 
     .mapboxgl-popup-tip {
         display: none;
