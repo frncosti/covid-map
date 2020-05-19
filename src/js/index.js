@@ -106,7 +106,7 @@ const onLoadMap = (geojson, map, initialCoordinates, results, initialZoom) => {
             deaths = deaths == undefined ? 0 : deaths;
             recovered = recovered == undefined ? 0 : recovered;
 
-            console.log('Confirmed: ' + confirmed + ' Deaths: ' + deaths + ' ' + ' Recovered' + recovered);
+            //console.log('Confirmed: ' + confirmed + ' Deaths: ' + deaths + ' ' + ' Recovered' + recovered);
 
             pinOnClick(
                 map,
@@ -118,9 +118,7 @@ const onLoadMap = (geojson, map, initialCoordinates, results, initialZoom) => {
                 popup
             );
 
-            
             filter.value = country;
-            console.log(country);
         });
 
         // Popup on open
