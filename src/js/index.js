@@ -56,6 +56,7 @@ const initMap = results => {
 const onLoadMap = (geojson, map, initialCoordinates, results, initialZoom) => {
     document.getElementById('map').classList.remove('map-loader');
     document.getElementById('mapcontrols').classList.add('show');
+    const filter = document.getElementById('map-search');
 
     geojson.features.forEach(marker => {
         let el = document.createElement('div');
@@ -116,6 +117,10 @@ const onLoadMap = (geojson, map, initialCoordinates, results, initialZoom) => {
                 recovered,
                 popup
             );
+
+            
+            filter.value = country;
+            console.log(country);
         });
 
         // Popup on open
@@ -126,6 +131,7 @@ const onLoadMap = (geojson, map, initialCoordinates, results, initialZoom) => {
         // Popup on close
         popup.on('close', e => {
             popUpOnClose(map, initialCoordinates, initialZoom);
+            filter.value = '#';
         });
     });
 }
@@ -186,7 +192,8 @@ const initSearchDropDown = (country, title) => {
 
 const onSearchDropDown = (map, geojson, results, initialCoordinates, initialZoom) => {
     const mapSearch = document.getElementById("map-search");
-
+    const filter = document.getElementById('map-search');
+    
     mapSearch.onchange = () => {
         let optValue = mapSearch.value;
 
@@ -269,6 +276,8 @@ const onSearchDropDown = (map, geojson, results, initialCoordinates, initialZoom
                         pitch: 0,
                         bearing: 0,
                     });
+
+                    filter.value = '#';
     
                 });
 
