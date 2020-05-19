@@ -2,13 +2,11 @@
 ## Install Packages
 - npm install
 
-##  Build App
+## Build Application
 - npm run build
 
-Please use dist folder for prod
-
-## Demo
-- http://frncosti.com/
+## Deploy
+- Please build the application and use the build folder files
 
 ## API
 - https://covid19api.com/#details
