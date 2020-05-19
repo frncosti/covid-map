@@ -12,7 +12,7 @@
 
     @media (max-width: 768px) {
         padding: 0 1rem !important;
-        bottom: -1rem;
+        bottom: 0;
     }
 
     .mapboxgl-popup-tip {
@@ -21,6 +21,10 @@
 
     .mapboxgl-popup-content {
         padding: .5rem 1rem;
+
+        @media (max-width: 768px) {
+            padding: 0rem 1rem .5rem;
+        }
     }
 
     h3 {
@@ -84,8 +88,8 @@
     .p-bodytext {
         margin-top: 0;
         padding-left: 1.5rem;
-        padding-top: .5rem;
         padding-bottom: .5rem;
+        margin-bottom: 0;
 
         li {
             padding-bottom: .25rem;
